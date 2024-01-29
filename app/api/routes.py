@@ -6,13 +6,16 @@ import sseclient
 from app.services import openai_service, pinecone_service, scraping_service
 from app.utils.helper_functions import chunk_text, build_prompt, construct_messages_list
 
-PINECONE_INDEX_NAME = 'index237'
+PINECONE_INDEX_NAME = 'indexname'
 
 @api_blueprint.route('/handle-query', methods=['POST'])
 def handle_query():
     question = request.json['question']
-    chat_history = request.json['chatHistory']
-    
+    # chat_history = request.json['chatHistory']
+    try:
+        chat_history = request.json['chatHistory']
+    except KeyError:
+        chat_history = ""
     # Get the most similar chunks from Pinecone
     context_chunks = pinecone_service.get_most_similar_chunks_for_query(question, PINECONE_INDEX_NAME)
     
