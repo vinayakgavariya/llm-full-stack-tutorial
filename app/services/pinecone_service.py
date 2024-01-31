@@ -29,7 +29,7 @@ def embed_chunks_and_upload_to_pinecone(chunks, indexname):
     # )
     index = pinecone.Index(indexname)
 
-    # Embedding each chunk and preparing for upload
+    # Embedding each chunk & preparing for upload 
     print("\nEmbedding chunks using OpenAI ...")
     embeddings_with_ids = []
     for i, chunk in enumerate(chunks):
